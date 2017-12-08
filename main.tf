@@ -13,3 +13,13 @@ resource "aws_instance" "web" {
   ami           = "ami-032fb460"
   instance_type = "t2.micro"
 }
+
+module "s3bucket" {
+  source        = "git@github.com:honestbee/tf-modules.git?ref=master//aws/bucket"
+  namespace     = "honestbee"
+  stage         = "staging"
+  name          = "atlantis-test"
+  access        = "private"
+  force_destroy = false
+  region        = "ap-southeast-1"
+}
